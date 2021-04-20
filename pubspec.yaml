@@ -1,6 +1,6 @@
 name: rounded_expansion_tile
-description: Simple Expansiontile with borderradius.
-version: 0.0.1
+description: A simple Expansiontile for Flutter applications with borderradius.
+version: 0.0.2
 homepage: https://github.com/simplewidgets/rounded_expansion_tile
 
 environment:
