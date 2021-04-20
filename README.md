@@ -1,14 +1,8 @@
-# roundedexpansiontile
+# Rounded Expansiontile
 
-A new Flutter package project.
+A simple combination of widgets to provide an Expansiontile with rounded corners.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+This Widget returns a column with a ListTile and a ListView. It has all properties of the ListTile width a few custom inputfield.
+Simple load the widget in your pubspec yaml and start using it.
