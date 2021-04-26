@@ -1,4 +1,8 @@
-## [0.0.4] 25 april 2021.
+## [0.0.6] 25 april 2021.
+
+Updated README.md
+
+## [0.0.5] 25 april 2021.
 
 Added comments to code.
 

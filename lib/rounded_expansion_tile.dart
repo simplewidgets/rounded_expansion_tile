@@ -27,7 +27,6 @@ class RoundedExpansionTile extends StatefulWidget {
   final Widget trailing;
   final VisualDensity visualDensity;
   final void Function() onTap;
-  final double radius;
   final Duration duration;
   final List<Widget> children;
   final Curve curve;
@@ -40,7 +39,6 @@ class RoundedExpansionTile extends StatefulWidget {
       this.subtitle,
       this.leading,
       this.trailing,
-      this.radius,
       this.duration,
       this.children,
       this.autofocus,
