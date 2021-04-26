@@ -32,7 +32,8 @@ class RoundedExpansionTile extends StatefulWidget {
   final List<Widget> children;
   final Curve curve;
   final EdgeInsets childrenPadding;
-  final bool menuIcon;
+  final bool rotateTrailing;
+  final bool noTrailing;
 
   RoundedExpansionTile(
       {this.title,
@@ -65,7 +66,8 @@ class RoundedExpansionTile extends StatefulWidget {
       this.onTap,
       this.curve,
       this.childrenPadding,
-      this.menuIcon});
+      this.rotateTrailing,
+      this.noTrailing});
 
   @override
   _RoundedExpansionTileState createState() => _RoundedExpansionTileState();
@@ -74,23 +76,43 @@ class RoundedExpansionTile extends StatefulWidget {
 class _RoundedExpansionTileState extends State<RoundedExpansionTile>
     with TickerProviderStateMixin {
   bool _expanded;
+  bool _rotateTrailing;
+  bool _noTrailing;
   AnimationController _controller;
   Duration defaultDuration = Duration(milliseconds: 500);
+  AnimationController _iconController;
+  Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
     _expanded = false;
+    _rotateTrailing =
+        widget.rotateTrailing == null ? true : widget.rotateTrailing;
+    _noTrailing = widget.noTrailing == null ? false : widget.noTrailing;
     _controller = AnimationController(
         vsync: this,
-        duration: widget.duration == null ? defaultDuration : widget.duration);
+        duration: widget.duration == null ? defaultDuration : widget.duration)
+      ..repeat(reverse: true);
+
+    _iconController = AnimationController(
+      duration: widget.duration == null ? defaultDuration : widget.duration,
+      vsync: this,
+    );
+
+    _animation = CurvedAnimation(
+        parent: _iconController,
+        curve: Curves.linear,
+        reverseCurve: Curves.linear);
     _controller.forward();
+    // _iconController.forward();
   }
 
   @override
   void dispose() {
     super.dispose();
     _controller.dispose();
+    _iconController.dispose();
   }
 
   @override
@@ -125,18 +147,7 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
             subtitle: widget.subtitle,
             title: widget.title,
             tileColor: widget.tileColor,
-            trailing: widget.trailing == null
-                ? widget.menuIcon == null
-                    ? AnimatedIcon(
-                        icon: AnimatedIcons.close_menu, progress: _controller)
-                    : widget.menuIcon
-                        ? AnimatedIcon(
-                            icon: AnimatedIcons.close_menu,
-                            progress: _controller)
-                        : AnimatedIcon(
-                            icon: AnimatedIcons.view_list,
-                            progress: _controller)
-                : widget.trailing,
+            trailing: _noTrailing ? null : _trailingIcon(),
             visualDensity: widget.visualDensity,
             onTap: () {
               if (widget.onTap != null) {
@@ -148,9 +159,11 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
                 if (_expanded) {
                   _expanded = !_expanded;
                   _controller.forward();
+                  _iconController.reverse();
                 } else {
                   _expanded = !_expanded;
                   _controller.reverse();
+                  _iconController.forward();
                 }
               });
             },
@@ -175,5 +188,21 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
               ),
               secondChild: Container()),
         ]);
+  }
+
+  Widget _trailingIcon() {
+    if (widget.trailing != null) {
+      if (_rotateTrailing) {
+        print('This one is called!');
+        return RotationTransition(
+            turns: Tween(begin: 0.0, end: 0.5).animate(_iconController),
+            child: widget.trailing);
+      } else {
+        return widget.trailing;
+      }
+    } else {
+      return AnimatedIcon(
+          icon: AnimatedIcons.close_menu, progress: _controller);
+    }
   }
 }
