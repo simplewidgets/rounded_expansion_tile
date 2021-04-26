@@ -147,12 +147,10 @@ class MyHomePage extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
             child: RoundedExpansionTile(
-              focusColor: Colors.green,
               leading: Icon(Icons.person),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24)),
-              title: Text('BorderRadius.circular(24)'),
-              subtitle: Text('Subtitle'),
+              title: Text('Default trailing'),
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -182,8 +180,7 @@ class MyHomePage extends StatelessWidget {
               leading: Icon(Icons.person),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(28)),
-              title: Text('BorderRadius.circular(24)'),
-              subtitle: Text('Subtitle'),
+              title: Text('Custom trailing with rotation'),
               trailing: Icon(Icons.keyboard_arrow_down),
               rotateTrailing: true,
               children: [

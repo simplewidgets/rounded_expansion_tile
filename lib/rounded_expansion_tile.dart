@@ -79,31 +79,29 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
   bool _rotateTrailing;
   bool _noTrailing;
   AnimationController _controller;
-  Duration defaultDuration = Duration(milliseconds: 500);
   AnimationController _iconController;
-  Animation<double> _animation;
+
+  // When the duration of the ListTile animation is NOT provided. This value will be used instead.
+  Duration defaultDuration = Duration(milliseconds: 500);
 
   @override
   void initState() {
     super.initState();
     _expanded = false;
+    // If not provided, this will be true
     _rotateTrailing =
         widget.rotateTrailing == null ? true : widget.rotateTrailing;
+    // If not provided this will be false
     _noTrailing = widget.noTrailing == null ? false : widget.noTrailing;
     _controller = AnimationController(
         vsync: this,
-        duration: widget.duration == null ? defaultDuration : widget.duration)
-      ..repeat(reverse: true);
+        duration: widget.duration == null ? defaultDuration : widget.duration);
 
     _iconController = AnimationController(
       duration: widget.duration == null ? defaultDuration : widget.duration,
       vsync: this,
     );
 
-    _animation = CurvedAnimation(
-        parent: _iconController,
-        curve: Curves.linear,
-        reverseCurve: Curves.linear);
     _controller.forward();
     // _iconController.forward();
   }
@@ -123,16 +121,21 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
+            // If bool is not provided the default will be false.
             autofocus: widget.autofocus == null ? false : widget.autofocus,
             contentPadding: widget.contentPadding,
+            // If bool is not provided the default will be false.
             dense: widget.dense == null ? false : widget.dense,
+            // If bool is not provided the default will be true.
             enabled: widget.enabled == null ? true : widget.enabled,
             enableFeedback:
+                // If bool is not provided the default will be false.
                 widget.enableFeedback == null ? false : widget.enableFeedback,
             focusColor: widget.focusColor,
             focusNode: widget.focusNode,
             horizontalTitleGap: widget.horizontalTitleGap,
             hoverColor: widget.hoverColor,
+            // If bool is not provided the default will be false.
             isThreeLine:
                 widget.isThreeLine == null ? false : widget.isThreeLine,
             key: widget.key,
@@ -141,6 +144,7 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
             minVerticalPadding: widget.minVerticalPadding,
             mouseCursor: widget.mouseCursor,
             onLongPress: widget.onLongPress,
+            // If bool is not provided the default will be false.
             selected: widget.selected == null ? false : widget.selected,
             selectedTileColor: widget.selectedTileColor,
             shape: widget.shape,
@@ -151,11 +155,14 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
             visualDensity: widget.visualDensity,
             onTap: () {
               if (widget.onTap != null) {
-                // if developer defines an extra option on tap, this will be executed.
-                // ignore: unnecessary_statements
+                /// Developers who uses this package can add custom functionality when tapped.
+                ///
+                /// When a developer defines an extra option on tap, this will be executed. If not provided this step will be skipped.
+                /// ignore: unnecessary_statements
                 widget.onTap;
               }
               setState(() {
+                // Checks if the ListTile is expanded and sets state accordingly.
                 if (_expanded) {
                   _expanded = !_expanded;
                   _controller.forward();
