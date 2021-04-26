@@ -44,19 +44,19 @@ Simply load the widget in your pubspec yaml and start using it.
     Use the RoundedExpansionTile in a Card-widget with the same shape for the best result.
 
     ``` 
-        Card(
+    Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: RoundedExpansionTile(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            child: RoundedExpansionTile(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              title: Text('Some title'),
-              children: [
+            title: Text('Some title'),
+            children: [
                 child1,
                 child2,
                 child3,
                 ...
-              ],
-            ),
-          ),
+            ],
+        ),
+    ),
     ```
     
 
