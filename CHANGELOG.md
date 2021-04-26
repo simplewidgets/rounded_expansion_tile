@@ -1,4 +1,8 @@
-## [0.0.3] 20 april 2021.
+## [0.0.4] 26 april 2021.
+
+Added an example flutter app to showcase options of the rounded expansion tile. Added the possibility to use a custom icon for the trailing. For example Keyboard Arrow Down (Like the original ExpansionTile)
+
+## [0.0.3] 26 april 2021.
 
 Added an example flutter app to showcase options of the rounded expansion tile.
 
