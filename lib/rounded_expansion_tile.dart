@@ -187,27 +187,36 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
                   : CrossFadeState.showSecond,
               duration:
                   widget.duration == null ? defaultDuration : widget.duration,
-              firstChild: ListView(
+              firstChild:
+
+                  /// Returns Listviews for the children.
+                  ///
+                  /// ClampingScrollPhyiscs so the ListTile will scroll in the main screen and not its children.
+                  /// Shrinkwrap is always true so the ExpansionTile will wrap its children and hide when not expanded.
+                  ListView(
                 physics: ClampingScrollPhysics(),
                 padding: widget.childrenPadding,
                 shrinkWrap: true,
                 children: widget.children,
               ),
+              // If not expanded just returns an empty containter so the ExpansionTile will only show the ListTile.
               secondChild: Container()),
         ]);
   }
 
+  // Build trailing widget based on the user input.
   Widget _trailingIcon() {
     if (widget.trailing != null) {
       if (_rotateTrailing) {
-        print('This one is called!');
         return RotationTransition(
             turns: Tween(begin: 0.0, end: 0.5).animate(_iconController),
             child: widget.trailing);
       } else {
+        // If developer sets rotateTrailing to false the widget will just be returned.
         return widget.trailing;
       }
     } else {
+      // Default trailing is an Animated Menu Icon.
       return AnimatedIcon(
           icon: AnimatedIcons.close_menu, progress: _controller);
     }
