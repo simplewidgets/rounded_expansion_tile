@@ -1,4 +1,7 @@
 ## [0.0.6] - [0.0.12] 26 april 2021.
+    Null safety
+
+## [0.0.6] - [0.0.12] 26 april 2021.
     Updated README.md
 
 ## [0.0.5] 26 april 2021.

@@ -2,37 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class RoundedExpansionTile extends StatefulWidget {
-  final bool autofocus;
-  final EdgeInsetsGeometry contentPadding;
-  final bool dense;
-  final bool enabled;
-  final bool enableFeedback;
-  final Color focusColor;
-  final FocusNode focusNode;
-  final double horizontalTitleGap;
-  final Color hoverColor;
-  final bool isThreeLine;
-  final Key key;
-  final Widget leading;
-  final double minLeadingWidth;
-  final double minVerticalPadding;
-  final MouseCursor mouseCursor;
-  final void Function() onLongPress;
-  final bool selected;
-  final Color selectedTileColor;
-  final ShapeBorder shape;
-  final Widget subtitle;
-  final Widget title;
-  final Color tileColor;
-  final Widget trailing;
-  final VisualDensity visualDensity;
-  final void Function() onTap;
-  final Duration duration;
-  final List<Widget> children;
-  final Curve curve;
-  final EdgeInsets childrenPadding;
-  final bool rotateTrailing;
-  final bool noTrailing;
+  final bool? autofocus;
+  final EdgeInsetsGeometry? contentPadding;
+  final bool? dense;
+  final bool? enabled;
+  final bool? enableFeedback;
+  final Color? focusColor;
+  final FocusNode? focusNode;
+  final double? horizontalTitleGap;
+  final Color? hoverColor;
+  final bool? isThreeLine;
+  final Key? key;
+  final Widget? leading;
+  final double? minLeadingWidth;
+  final double? minVerticalPadding;
+  final MouseCursor? mouseCursor;
+  final void Function()? onLongPress;
+  final bool? selected;
+  final Color? selectedTileColor;
+  final ShapeBorder? shape;
+  final Widget? subtitle;
+  final Widget? title;
+  final Color? tileColor;
+  final Widget? trailing;
+  final VisualDensity? visualDensity;
+  final void Function()? onTap;
+  final Duration? duration;
+  final List<Widget>? children;
+  final Curve? curve;
+  final EdgeInsets? childrenPadding;
+  final bool? rotateTrailing;
+  final bool? noTrailing;
 
   RoundedExpansionTile(
       {this.title,
@@ -73,11 +73,11 @@ class RoundedExpansionTile extends StatefulWidget {
 
 class _RoundedExpansionTileState extends State<RoundedExpansionTile>
     with TickerProviderStateMixin {
-  bool _expanded;
-  bool _rotateTrailing;
-  bool _noTrailing;
-  AnimationController _controller;
-  AnimationController _iconController;
+  late bool _expanded;
+  bool? _rotateTrailing;
+  bool? _noTrailing;
+  late AnimationController _controller;
+  late AnimationController _iconController;
 
   // When the duration of the ListTile animation is NOT provided. This value will be used instead.
   Duration defaultDuration = Duration(milliseconds: 500);
@@ -120,12 +120,12 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
         children: [
           ListTile(
             // If bool is not provided the default will be false.
-            autofocus: widget.autofocus == null ? false : widget.autofocus,
+            autofocus: widget.autofocus == null ? false : widget.autofocus!,
             contentPadding: widget.contentPadding,
             // If bool is not provided the default will be false.
             dense: widget.dense == null ? false : widget.dense,
             // If bool is not provided the default will be true.
-            enabled: widget.enabled == null ? true : widget.enabled,
+            enabled: widget.enabled == null ? true : widget.enabled!,
             enableFeedback:
                 // If bool is not provided the default will be false.
                 widget.enableFeedback == null ? false : widget.enableFeedback,
@@ -135,7 +135,7 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
             hoverColor: widget.hoverColor,
             // If bool is not provided the default will be false.
             isThreeLine:
-                widget.isThreeLine == null ? false : widget.isThreeLine,
+                widget.isThreeLine == null ? false : widget.isThreeLine!,
             key: widget.key,
             leading: widget.leading,
             minLeadingWidth: widget.minLeadingWidth,
@@ -143,13 +143,13 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
             mouseCursor: widget.mouseCursor,
             onLongPress: widget.onLongPress,
             // If bool is not provided the default will be false.
-            selected: widget.selected == null ? false : widget.selected,
+            selected: widget.selected == null ? false : widget.selected!,
             selectedTileColor: widget.selectedTileColor,
             shape: widget.shape,
             subtitle: widget.subtitle,
             title: widget.title,
             tileColor: widget.tileColor,
-            trailing: _noTrailing ? null : _trailingIcon(),
+            trailing: _noTrailing! ? null : _trailingIcon(),
             visualDensity: widget.visualDensity,
             onTap: () {
               if (widget.onTap != null) {
@@ -176,15 +176,15 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
           AnimatedCrossFade(
               firstCurve: widget.curve == null
                   ? Curves.fastLinearToSlowEaseIn
-                  : widget.curve,
+                  : widget.curve!,
               secondCurve: widget.curve == null
                   ? Curves.fastLinearToSlowEaseIn
-                  : widget.curve,
+                  : widget.curve!,
               crossFadeState: _expanded
                   ? CrossFadeState.showFirst
                   : CrossFadeState.showSecond,
               duration:
-                  widget.duration == null ? defaultDuration : widget.duration,
+                  widget.duration == null ? defaultDuration : widget.duration!,
               firstChild:
 
                   /// Returns Listviews for the children.
@@ -195,7 +195,7 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
                 physics: ClampingScrollPhysics(),
                 padding: widget.childrenPadding,
                 shrinkWrap: true,
-                children: widget.children,
+                children: widget.children!,
               ),
               // If not expanded just returns an empty containter so the ExpansionTile will only show the ListTile.
               secondChild: Container()),
@@ -203,9 +203,9 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
   }
 
   // Build trailing widget based on the user input.
-  Widget _trailingIcon() {
+  Widget? _trailingIcon() {
     if (widget.trailing != null) {
-      if (_rotateTrailing) {
+      if (_rotateTrailing!) {
         return RotationTransition(
             turns: Tween(begin: 0.0, end: 0.5).animate(_iconController),
             child: widget.trailing);
