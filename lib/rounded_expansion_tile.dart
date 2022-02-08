@@ -179,7 +179,7 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile> with Ticker
               /// Shrinkwrap is always true so the ExpansionTile will wrap its children and hide when not expanded.
               ListView(
             physics: ClampingScrollPhysics(),
-            padding: widget.childrenPadding,
+            padding: widget.childrenPadding ?? EdgeInsets.zero,
             shrinkWrap: true,
             children: widget.children!,
           ),
