@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class RoundedExpansionTile extends StatefulWidget {
   final bool? autofocus;
@@ -71,7 +70,8 @@ class RoundedExpansionTile extends StatefulWidget {
   _RoundedExpansionTileState createState() => _RoundedExpansionTileState();
 }
 
-class _RoundedExpansionTileState extends State<RoundedExpansionTile> with TickerProviderStateMixin {
+class _RoundedExpansionTileState extends State<RoundedExpansionTile>
+    with TickerProviderStateMixin {
   late bool _expanded;
   bool? _rotateTrailing;
   bool? _noTrailing;
@@ -86,10 +86,13 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile> with Ticker
     super.initState();
     _expanded = false;
     // If not provided, this will be true
-    _rotateTrailing = widget.rotateTrailing == null ? true : widget.rotateTrailing;
+    _rotateTrailing =
+        widget.rotateTrailing == null ? true : widget.rotateTrailing;
     // If not provided this will be false
     _noTrailing = widget.noTrailing == null ? false : widget.noTrailing;
-    _controller = AnimationController(vsync: this, duration: widget.duration == null ? defaultDuration : widget.duration);
+    _controller = AnimationController(
+        vsync: this,
+        duration: widget.duration == null ? defaultDuration : widget.duration);
 
     _iconController = AnimationController(
       duration: widget.duration == null ? defaultDuration : widget.duration,
@@ -111,95 +114,109 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile> with Ticker
 
   @override
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.min, children: [
-      ListTile(
-        // If bool is not provided the default will be false.
-        autofocus: widget.autofocus == null ? false : widget.autofocus!,
-        contentPadding: widget.contentPadding,
-        // If bool is not provided the default will be false.
-        dense: widget.dense == null ? false : widget.dense,
-        // If bool is not provided the default will be true.
-        enabled: widget.enabled == null ? true : widget.enabled!,
-        enableFeedback:
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
             // If bool is not provided the default will be false.
-            widget.enableFeedback == null ? false : widget.enableFeedback,
-        focusColor: widget.focusColor,
-        focusNode: widget.focusNode,
-        horizontalTitleGap: widget.horizontalTitleGap,
-        hoverColor: widget.hoverColor,
-        // If bool is not provided the default will be false.
-        isThreeLine: widget.isThreeLine == null ? false : widget.isThreeLine!,
-        key: widget.key,
-        leading: widget.leading,
-        minLeadingWidth: widget.minLeadingWidth,
-        minVerticalPadding: widget.minVerticalPadding,
-        mouseCursor: widget.mouseCursor,
-        onLongPress: widget.onLongPress,
-        // If bool is not provided the default will be false.
-        selected: widget.selected == null ? false : widget.selected!,
-        selectedTileColor: widget.selectedTileColor,
-        shape: widget.shape,
-        subtitle: widget.subtitle,
-        title: widget.title,
-        tileColor: widget.tileColor,
-        trailing: _noTrailing! ? null : _trailingIcon(),
-        visualDensity: widget.visualDensity,
-        onTap: () {
-          if (widget.onTap != null) {
-            /// Developers who uses this package can add custom functionality when tapped.
-            ///
-            /// When a developer defines an extra option on tap, this will be executed. If not provided this step will be skipped.
-            /// ignore: unnecessary_statements
-            widget.onTap;
-          }
-          setState(() {
-            // Checks if the ListTile is expanded and sets state accordingly.
-            if (_expanded) {
-              _expanded = !_expanded;
-              _controller.forward();
-              _iconController.reverse();
-            } else {
-              _expanded = !_expanded;
-              _controller.reverse();
-              _iconController.forward();
-            }
-          });
-        },
-      ),
-      AnimatedCrossFade(
-          firstCurve: widget.curve == null ? Curves.fastLinearToSlowEaseIn : widget.curve!,
-          secondCurve: widget.curve == null ? Curves.fastLinearToSlowEaseIn : widget.curve!,
-          crossFadeState: _expanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-          duration: widget.duration == null ? defaultDuration : widget.duration!,
-          firstChild:
-
-              /// Returns Listviews for the children.
-              ///
-              /// ClampingScrollPhyiscs so the ListTile will scroll in the main screen and not its children.
-              /// Shrinkwrap is always true so the ExpansionTile will wrap its children and hide when not expanded.
-              ListView(
-            physics: ClampingScrollPhysics(),
-            padding: widget.childrenPadding ?? EdgeInsets.zero,
-            shrinkWrap: true,
-            children: widget.children!,
+            autofocus: widget.autofocus ?? false,
+            contentPadding: widget.contentPadding,
+            // If bool is not provided the default will be false.
+            dense: widget.dense,
+            // If bool is not provided the default will be true.
+            enabled: widget.enabled ?? true,
+            enableFeedback:
+                // If bool is not provided the default will be false.
+                widget.enableFeedback ?? false,
+            focusColor: widget.focusColor,
+            focusNode: widget.focusNode,
+            horizontalTitleGap: widget.horizontalTitleGap,
+            hoverColor: widget.hoverColor,
+            // If bool is not provided the default will be false.
+            isThreeLine: widget.isThreeLine ?? false,
+            key: widget.key,
+            leading: widget.leading,
+            minLeadingWidth: widget.minLeadingWidth,
+            minVerticalPadding: widget.minVerticalPadding,
+            mouseCursor: widget.mouseCursor,
+            onLongPress: widget.onLongPress,
+            // If bool is not provided the default will be false.
+            selected: widget.selected ?? false,
+            selectedTileColor: widget.selectedTileColor,
+            shape: widget.shape,
+            subtitle: widget.subtitle,
+            title: widget.title,
+            tileColor: widget.tileColor,
+            trailing: _noTrailing! ? null : _trailingIcon(),
+            visualDensity: widget.visualDensity,
+            onTap: () {
+              if (widget.onTap != null) {
+                /// Developers who uses this package can add custom functionality when tapped.
+                ///
+                /// When a developer defines an extra option on tap, this will be executed. If not provided this step will be skipped.
+                /// ignore: unnecessary_statements
+                widget.onTap;
+              }
+              setState(() {
+                // Checks if the ListTile is expanded and sets state accordingly.
+                if (_expanded) {
+                  _expanded = !_expanded;
+                  _controller.forward();
+                  _iconController.reverse();
+                } else {
+                  _expanded = !_expanded;
+                  _controller.reverse();
+                  _iconController.forward();
+                }
+              });
+            },
           ),
-          // If not expanded just returns an empty containter so the ExpansionTile will only show the ListTile.
-          secondChild: Container()),
-    ]);
+          AnimatedCrossFade(
+              firstCurve: widget.curve == null
+                  ? Curves.fastLinearToSlowEaseIn
+                  : widget.curve!,
+              secondCurve: widget.curve == null
+                  ? Curves.fastLinearToSlowEaseIn
+                  : widget.curve!,
+              crossFadeState: _expanded
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration:
+                  widget.duration == null ? defaultDuration : widget.duration!,
+              firstChild:
+
+                  /// Returns Listviews for the children.
+                  ///
+                  /// ClampingScrollPhyiscs so the ListTile will scroll in the main screen and not its children.
+                  /// Shrinkwrap is always true so the ExpansionTile will wrap its children and hide when not expanded.
+                  ListView(
+                physics: ClampingScrollPhysics(),
+                padding: widget.childrenPadding ?? EdgeInsets.zero,
+                shrinkWrap: true,
+                children: widget.children!,
+              ),
+              // If not expanded just returns an empty containter so the ExpansionTile will only show the ListTile.
+              secondChild: Container()),
+        ]);
   }
 
   // Build trailing widget based on the user input.
   Widget? _trailingIcon() {
     if (widget.trailing != null) {
       if (_rotateTrailing!) {
-        return RotationTransition(turns: Tween(begin: 0.0, end: 0.5).animate(_iconController), child: widget.trailing);
+        return RotationTransition(
+            turns: Tween(begin: 0.0, end: 0.5).animate(_iconController),
+            child: widget.trailing);
       } else {
         // If developer sets rotateTrailing to false the widget will just be returned.
         return widget.trailing;
       }
     } else {
       // Default trailing is an Animated Menu Icon.
-      return AnimatedIcon(icon: AnimatedIcons.close_menu, progress: _controller);
+      return AnimatedIcon(
+          icon: AnimatedIcons.close_menu, progress: _controller);
     }
   }
 }
