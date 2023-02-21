@@ -10,7 +10,7 @@ Simply load the widget in your pubspec yaml and start using it.
 
 ## Inputfields
 
-### Default ListTile inputfields
+### Default ListTile and ExpansionTile inputfields
 
 - autofocus
 - contentPadding
@@ -37,6 +37,8 @@ Simply load the widget in your pubspec yaml and start using it.
 - trailing
 - visualDensity
 - onTap
+
+- initiallyExpanded
 
 ### Extra inputfields and tips
 
