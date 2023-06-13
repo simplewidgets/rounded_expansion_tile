@@ -51,6 +51,7 @@ class MyHomePage extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             child: RoundedExpansionTile(
+              initiallyExpanded: true,
               leading: Icon(Icons.person),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),

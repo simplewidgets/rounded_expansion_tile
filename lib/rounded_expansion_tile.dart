@@ -32,6 +32,7 @@ class RoundedExpansionTile extends StatefulWidget {
   final EdgeInsets? childrenPadding;
   final bool? rotateTrailing;
   final bool? noTrailing;
+  final bool initiallyExpanded;
 
   RoundedExpansionTile(
       {this.title,
@@ -64,7 +65,9 @@ class RoundedExpansionTile extends StatefulWidget {
       this.curve,
       this.childrenPadding,
       this.rotateTrailing,
-      this.noTrailing});
+      this.noTrailing,
+      this.initiallyExpanded = false
+    });
 
   @override
   _RoundedExpansionTileState createState() => _RoundedExpansionTileState();
@@ -84,7 +87,7 @@ class _RoundedExpansionTileState extends State<RoundedExpansionTile>
   @override
   void initState() {
     super.initState();
-    _expanded = false;
+    _expanded = widget.initiallyExpanded;
     // If not provided, this will be true
     _rotateTrailing =
         widget.rotateTrailing == null ? true : widget.rotateTrailing;
